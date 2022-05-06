@@ -176,7 +176,7 @@ class _CommentPageState extends State<CommentPage> {
                             ],
                           ),
                           Text(
-                            "username",
+                            "${widget.postModel.body}",
                             style: const TextStyle(
                                 fontSize: 12, color: Colors.black),
                           ),

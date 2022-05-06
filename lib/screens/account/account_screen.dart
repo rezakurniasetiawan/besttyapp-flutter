@@ -25,7 +25,7 @@ class _AccountScreenState extends State<AccountScreen>
   late TabController tabController = TabController(length: 2, vsync: this);
   UserModel? userModel;
   bool loading = true;
-  List<dynamic> _postUserList = [];
+  List<dynamic> _userList = [];
 
   File? _imageFile;
   final _picker = ImagePicker();
@@ -73,7 +73,7 @@ class _AccountScreenState extends State<AccountScreen>
     print(userId);
     if (response.error == null) {
       setState(() {
-        _postUserList = response.data as List<dynamic>;
+        _userList = response.data as List<dynamic>;
         loading = loading ? !loading : loading;
       });
     } else if (response.error == unauthorized) {
@@ -127,7 +127,12 @@ class _AccountScreenState extends State<AccountScreen>
                   padding: EdgeInsets.only(right: 10),
                   child: InkWell(
                     onTap: () {
-                      getPostUser(userModel!.id ?? 0);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => PostinganUserPage(
+                                  userId: userModel!.id ?? 0,
+                                )),
+                      );
                     },
                     child: Icon(
                       Icons.refresh,
@@ -258,41 +263,8 @@ class _AccountScreenState extends State<AccountScreen>
                         child: TabBarView(
                           controller: tabController,
                           children: [
-                            GridView(
-                              physics: NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3),
-                              children: <Widget>[
-                                PostinganUser(
-                                  image:
-                                      'https://scontent-sin6-1.xx.fbcdn.net/v/t39.30808-6/271796800_2045885402234345_8975544429843400071_n.jpg?_nc_cat=111&ccb=1-6&_nc_sid=730e14&_nc_eui2=AeHwnocx84slDhocWUsHc5dpyw4ixHXQPiHLDiLEddA-IfOVhnRiD2uM6LIlSnfV3Fl_LRKmvYFJ6dsiGMpnDNm5&_nc_ohc=Y1l-3XQ-baEAX-PStLu&_nc_ht=scontent-sin6-1.xx&oh=00_AT80RVYzeb6OTgpzySCtn6fkxart8InKAl6p4GJDEpINVA&oe=6279E8CC',
-                                ),
-                                PostinganUser(
-                                  image:
-                                      'https://dagodreampark.co.id/images/Gambar-Pemandangan-Gunung-dan-Bunga-Sakura.jpg',
-                                ),
-                                PostinganUser(
-                                  image:
-                                      'https://cdn.pixabay.com/photo/2018/09/07/19/44/mountains-3661319_960_720.png',
-                                ),
-
-                                // ListView.builder(
-                                //     itemCount: _postUserList.length,
-                                //     itemBuilder: (BuildContext context,
-                                //         int index) {
-                                //       PostModel post =
-                                //           _postUserList[index];
-                                //       return Container(
-                                //         color: Colors.redAccent,
-                                //         child: Image.network(
-                                //           "${post.image}",
-                                //           fit: BoxFit.cover,
-                                //         ),
-                                //         margin: EdgeInsets.all(7.0),
-                                //       );
-                                //     })
-                              ],
+                            PostinganUserPage(
+                              userId: userModel!.id ?? 0,
                             ),
                             Text("data"),
                           ],
