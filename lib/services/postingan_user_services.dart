@@ -17,7 +17,7 @@ Future<ApiResponse> getPostUsers(int userId) async {
     );
     switch (response.statusCode) {
       case 200:
-        print(apiResponse.data as List<dynamic>);
+        // print(jsonDecode(response.body)['post']);
         apiResponse.data = jsonDecode(response.body)['post']
             .map((p) => PostModel.fromJson(p))
             .toList();
