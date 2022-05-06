@@ -2,6 +2,7 @@
 
 import 'package:besty_apps/model/api_response_model.dart';
 import 'package:besty_apps/model/post_model.dart';
+import 'package:besty_apps/screens/home/component/comment_page.dart';
 import 'package:besty_apps/screens/login/login_screen.dart';
 import 'package:besty_apps/services/auth_services.dart';
 import 'package:besty_apps/services/post_services.dart';
@@ -268,7 +269,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    print("Comment");
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) => CommentPage(
+                                                  postModel: post,
+                                                )));
                                   },
                                   child: Row(
                                     children: [
@@ -279,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                                         width: 5,
                                       ),
                                       Text(
-                                        '0',
+                                        '${post.commentsCount ?? 0}',
                                         style: TextStyle(
                                             fontSize: 15, letterSpacing: 0.3),
                                       ),
