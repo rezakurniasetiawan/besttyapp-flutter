@@ -12,7 +12,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Search"),
+        child: Text("Maintenence"),
       ),
     );
   }
