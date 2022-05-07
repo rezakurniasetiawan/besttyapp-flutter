@@ -1,9 +1,8 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:besty_apps/model/api_response_model.dart';
 import 'package:besty_apps/model/post_model.dart';
 import 'package:besty_apps/screens/home/component/comment_page.dart';
 import 'package:besty_apps/screens/login/login_screen.dart';
+import 'package:besty_apps/screens/posting/component/detail_postingan.dart';
 import 'package:besty_apps/services/auth_services.dart';
 import 'package:besty_apps/services/post_services.dart';
 import 'package:besty_apps/widget/edit_post.dart';
@@ -233,17 +232,39 @@ class _HomePageState extends State<HomePage> {
                               height: 10,
                             ),
                             post.image != null
-                                ? Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 250,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.redAccent,
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                            "${post.image}",
-                                          ),
-                                          fit: BoxFit.cover),
+                                ? InkWell(
+                                    onLongPress: () {
+                                      print("Tampil Postingan");
+                                    },
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DetailPostingan(
+                                                  id: post.id,
+                                                  body: post.body,
+                                                  commentsCount:
+                                                      post.commentsCount,
+                                                  image: post.image,
+                                                  likesCount: post.likesCount,
+                                                  selfLiked: post.selfLiked,
+                                                  userModel: post.userModel,
+                                                  postModel: post,
+                                                )),
+                                      );
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 250,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.redAccent,
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                              "${post.image}",
+                                            ),
+                                            fit: BoxFit.cover),
+                                      ),
                                     ),
                                   )
                                 : SizedBox(
