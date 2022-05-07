@@ -123,160 +123,140 @@ class _AccountScreenState extends State<AccountScreen>
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => PostinganUserPage(
-                                  userId: userModel!.id ?? 0,
-                                )),
-                      );
-                    },
-                    child: Icon(
-                      Icons.refresh,
-                      color: Colors.black87,
-                    ),
-                  ),
-                )
               ],
               elevation: 0,
             ),
-            body: Padding(
-              padding: EdgeInsets.all(8),
-              child: ListView(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        width: 110,
-                        height: 110,
-                        decoration: BoxDecoration(
-                            image: userModel!.image != null
-                                ? DecorationImage(
-                                    image: NetworkImage('${userModel!.image}'),
-                                    fit: BoxFit.cover)
-                                : null,
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.redAccent),
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Center(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "${userModel!.name}",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w700),
-                          ),
-                          SizedBox(
-                            width: 2,
-                          ),
-                          ImageIcon(
-                            AssetImage('assets/images/verified.png'),
-                            color: Color(0xFF1676ED),
-                            size: 20,
-                          ),
-                        ],
-                      )),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Center(
-                        child: Text(
-                          "Bergabung pada : ${userModel!.createdAt}",
+            body: ListView(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: 110,
+                      height: 110,
+                      decoration: BoxDecoration(
+                          image: userModel!.image != null
+                              ? DecorationImage(
+                                  image: NetworkImage('${userModel!.image}'),
+                                  fit: BoxFit.cover)
+                              : null,
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.redAccent),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "${userModel!.name}",
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
+                              fontSize: 20, fontWeight: FontWeight.w700),
                         ),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        ImageIcon(
+                          AssetImage('assets/images/verified.png'),
+                          color: Color(0xFF1676ED),
+                          size: 20,
+                        ),
+                      ],
+                    )),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Center(
+                      child: Text(
+                        "Bergabung pada : ${userModel!.createdAt}",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w400),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              Text(
-                                "3",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Text("Post"),
-                            ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "3",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text("Post"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text("Followers"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text("Following"),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: TabBar(
+                        controller: tabController,
+                        indicatorColor: Colors.redAccent,
+                        tabs: [
+                          Tab(
+                            child: Text(
+                              "Posting",
+                              style: TextStyle(color: Colors.black),
+                            ),
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Text("Followers"),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Text("Following"),
-                            ],
-                          ),
+                          Tab(
+                            child: Text(
+                              "Tag",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          )
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                    Container(
+                      width: double.maxFinite,
+                      height: double.maxFinite,
+                      child: TabBarView(
+                        controller: tabController,
+                        children: [
+                          PostinganUserPage(
+                            userId: userModel!.id ?? 0,
+                          ),
+                          Text("data"),
+                        ],
                       ),
-                      Container(
-                        child: TabBar(
-                          controller: tabController,
-                          indicatorColor: Colors.redAccent,
-                          tabs: [
-                            Tab(
-                              child: Text(
-                                "Posting",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                "Tag",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: double.maxFinite,
-                        height: double.maxFinite,
-                        child: TabBarView(
-                          controller: tabController,
-                          children: [
-                            PostinganUserPage(
-                              userId: userModel!.id ?? 0,
-                            ),
-                            Text("data"),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 100,
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    SizedBox(
+                      height: 100,
+                    )
+                  ],
+                ),
+              ],
             ),
           );
   }
